@@ -106,16 +106,35 @@ for (let i = 0; i < hearts.length; i++) {
 
 // Coin Section Start Hear 
 
-let coin = coinNumber
-const coinNumber = document.getElementById("coin-counter")
+const coinSpan = document.getElementById("coin-counter");
+const historyContainer = document.getElementById("cart-container");
 
-const buttons = document.getElementsByClassName("call-btn")
+document.querySelectorAll(".call-btn").forEach(btn => {
+  btn.onclick = () => {
+    let coins = +coinSpan.textContent;
+    const card = btn.closest(".card");
+    const name = card.querySelector("p.text-tittle").textContent;
+    const nameI = card.querySelector("h2.card-title").textContent;
+    const number = card.querySelector("h1.copy-text").textContent;
+    const time = new Date().toLocaleTimeString();
+    
 
-for (let btn of buttons){
-  btn.onclick =function(){
-    if(coin < 20){
-      alert('You do not have enough Coin')
-      return
+    if (coins >= 20) {
+      coinSpan.textContent = coins - 20;
+      alert(`কলিং ${name} ${number}`);
+
+      const div = document.createElement("div");
+      div.className = "bg-gray-200 rounded-xl flex justify-between p-4 mt-4 items-center";
+      div.innerHTML = `<div class="font-medium m-4">${nameI}<br><span class="text-sm text-gray-500">${number}</span></div>
+                       <div class="text-sm text-gray-400">${time}</div>`;
+      historyContainer.prepend(div);
+    } else {
+      alert("আপনার  পর্যাপ্ত কয়েন নেই! কল করতে কমপক্ষে ২০ কয়েন লাগবে");
     }
-  }
-}
+  };
+});
+
+document.getElementById("clear-btn").onclick = () => {
+  historyContainer.innerHTML = "";
+  
+};
