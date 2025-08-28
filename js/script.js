@@ -11,7 +11,7 @@ for (let i = 0; i < hearts.length; i++) {
 }
 
 
-
+// Copy Counter section start Hear 
 
 let copyCount = 0;
 const copyNumber = document.getElementById("copy-counter");
